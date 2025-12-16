@@ -74,18 +74,11 @@ Select Option By Label
     # 1. สร้าง XPath หาตัว Trigger (div) โดยเริ่มหาจากชื่อหัวข้อ (${LABEL_NAME})
     # ความหมาย: หาข้อความชื่อหัวข้อ -> มองไล่ลงมาหา mat-select ตัวแรก -> เจาะเข้าไปหา div class='mat-mdc-select-trigger'
     ${trigger_xpath}=    Set Variable    xpath=(//*[contains(text(), '${LABEL_NAME}')]/following::mat-select)[1]//div[contains(@class, 'mat-mdc-select-trigger')]
-    
-    # 2. รอให้ Dropdown ปรากฏ (Visible)
     Wait Until Element Is Visible    ${trigger_xpath}    30s
     Sleep    1s    # รอให้นิ่งสนิทจริงๆ
     
     # 3. ใช้ JavaScript สั่งคลิกที่ Trigger (ไม้ตาย! ทะลุทุกการบัง)
     ${element}=    Get WebElement    ${trigger_xpath}
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
-    
-    # 4. รอและเลือกรายการที่ต้องการ (Option)
     Wait Until Element Is Visible    xpath=//span[normalize-space()='${OPTION_TEXT}']    10s
     Click Element    xpath=//span[normalize-space()='${OPTION_TEXT}']
-    
-    # 5. เช็คความเรียบร้อย (รอให้ตัวเลือกหายไป = เลือกเสร็จแล้ว)
-    Wait Until Element Is Not Visible    xpath=//span[normalize-space()='${OPTION_TEXT}']    5s
