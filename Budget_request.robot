@@ -103,12 +103,17 @@ Requese Budget success
     # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    30s
     # Input Text    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    130000
     Wait Until Element Is Not Visible    xpath=//div[contains(@class, 'ngx-spinner-overlay')]    30s
-    Wait Until Element Is Visible    xpath=//button[contains(@class, 'primary') and normalize-space()='บันทึก']    30s
-    ${save_final_btn}=    Get WebElement    xpath=//button[contains(@class, 'primary') and normalize-space()='บันทึก']
-    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_final_btn}
-    Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
-    Sleep    5s
 
+    # 2. รอให้ปุ่มบันทึก *ใน Popup นี้* ปรากฏ
+    # สังเกต XPath: เราเพิ่ม //app-form-budget-dialog-request นำหน้า เพื่อบอกขอบเขต
+    ${save_btn_locator}=    Set Variable    xpath=//app-form-budget-dialog-request//button[contains(@class, 'primary') and normalize-space()='บันทึก']
+    Wait Until Element Is Visible    ${save_btn_locator}    30s
+    
+    # 3. สั่งคลิกด้วย Javascript (เพื่อความแม่นยำสูงสุด)
+    ${save_btn}=    Get WebElement    ${save_btn_locator}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_btn}
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการ ระดับที่ 1')]    30s
+    Sleep    20s
 *** Keywords ***
 Login And Navigate To App
     Open Browser To Login Page
