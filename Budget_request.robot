@@ -88,20 +88,20 @@ Requese Budget success
     Click Button    ต่อไป
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'แผนการใช้จ่ายงบประมาณ')]    30s
     Sleep    2s
-    Wait Until Element Is Visible    xpath=//input[@type='radio' and @value='average']    30s
+    Wait Until Page Contains Element    xpath=//input[@type='radio' and @value='average']    30s
     ${avg_radio}=    Get WebElement    xpath=//input[@type='radio' and @value='average']
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${avg_radio}
-    Wait Until Element Is Visible    xpath=//input[@type='radio' and @value='quarterly']    30s
+    Wait Until Page Contains Element    xpath=//input[@type='radio' and @value='quarterly']    30s
     ${quarterly_radio}=    Get WebElement    xpath=//input[@type='radio' and @value='quarterly']
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${quarterly_radio}
     Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    30s
     Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    100000
     Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    110000
+    Input Text    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    110000
     Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    120000
+    Input Text    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    120000
     Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    130000
+    Input Text    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    130000
     Click Button    บันทึก
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
 
