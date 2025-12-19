@@ -94,17 +94,20 @@ Requese Budget success
     Wait Until Page Contains Element    xpath=//input[@type='radio' and @value='quarterly']    30s
     ${quarterly_radio}=    Get WebElement    xpath=//input[@type='radio' and @value='quarterly']
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${quarterly_radio}
-    Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    100000
-    Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    110000
-    Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    120000
-    Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    30s
-    Input Text    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    130000
-    Click Button    บันทึก
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    100000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    110000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    120000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    130000
+    Wait Until Element Is Not Visible    xpath=//div[contains(@class, 'ngx-spinner-overlay')]    30s
+    Wait Until Element Is Visible    xpath=//button[contains(@class, 'primary') and normalize-space()='บันทึก']    30s
+    ${save_final_btn}=    Get WebElement    xpath=//button[contains(@class, 'primary') and normalize-space()='บันทึก']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_final_btn}
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
-
+    Sleep    5s
 
 *** Keywords ***
 Login And Navigate To App
