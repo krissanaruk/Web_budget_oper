@@ -17,9 +17,10 @@ Go TO REGIS Success
     [Tags]    smoke
     Go TO REGISTRATION
 
+#E2E Testting
 Add REGIS Success 
     [Documentation]    เพิ่มทะเบียนรายการสำเร็จ 
-    [Tags]     regression
+    [Tags]     integration    e2e
     Go TO REGISTRATION
     Wait Until Element Is Visible    xpath=//button[normalize-space()='เพิ่มรายการ']    30s
     Click Element    xpath=//button[normalize-space()='เพิ่มรายการ']
