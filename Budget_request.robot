@@ -113,7 +113,14 @@ Requese Budget success
     ${save_btn}=    Get WebElement    ${save_btn_locator}
     Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_btn}
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการ ระดับที่ 1')]    30s
-    Sleep    20s
+    Click Button    บันทึก
+    Wait Until Page Contains    ตกลง    30s
+    Click Button    ตกลง
+    # Wait Until Page Contains    ตกลง    30s
+    # Sleep    5s
+    # Click Button    ตกลง
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
+    Sleep    5s
 *** Keywords ***
 Login And Navigate To App
     Open Browser To Login Page
