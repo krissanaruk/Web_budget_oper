@@ -31,7 +31,7 @@ Requese Budget success
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
     Element Should Contain    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    รายละเอียดรายการ
     Click Element    id=mat-radio-2
-    Select Option Dialog        แผนงานตามยุทธศาสตร์การจัดสรร     6400 : แผนงานบูรณาการต่อต้านการทุจริตและประพฤติมิชอบ   
+    Select Option Dialog        แผนงานตามยุทธศาสตร์การจัดสรร     7000 : แผนงานบริหารจัดการหนี้ภาครัฐ   
     Select Option Dialog        ผลผลิต/โครงการ      68000005 : ผลลิตทดสอบแผนงาน 1   
     Select Option Dialog        กิจกรรม             68000044 : กิจกรรมผลลิตทดสอบแผนงาน 1  
     Select Option Dialog        ประเภทงบรายจ่าย      03 : งบลงทุน         
@@ -121,6 +121,7 @@ Requese Budget success
     # Click Button    ตกลง
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
     Sleep    5s
+    
 *** Keywords ***
 Login And Navigate To App
     Open Browser To Login Page
