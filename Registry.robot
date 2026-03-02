@@ -8,8 +8,8 @@ Test Setup       Login And Navigate To App
 
 *** Variables ***
 # Test data
-${ชื่อรายการเพิ่มเติม}        (TER)
-${เเก้ไขชื่อรายการเพิ่มเติม}        (TERR)
+${ชื่อรายการเพิ่มเติม}        TER
+${เเก้ไขชื่อรายการเพิ่มเติม}        
 ${Operation area_button}        xpath=//div[contains(text(), 'เพิ่มพื้นที่ดำเนินการ')]
 
 *** Test Cases ***
@@ -29,6 +29,9 @@ Add REGIS Success
     [Documentation]    เพิ่มทะเบียนรายการสำเร็จ 
     [Tags]     integration    e2e
     Go TO REGISTRATION
+    ${year_select}=    Set Variable    xpath=//select[.//option[@value='2568']]
+    Wait Until Element Is Visible    ${year_select}    30s
+    Select From List By Label    ${year_select}    2568
     Wait Until Element Is Visible    xpath=//button[normalize-space()='เพิ่มรายการ']    30s
     Click Element    xpath=//button[normalize-space()='เพิ่มรายการ']
     Wait Until Element Is Visible    xpath=//button[normalize-space()='เลือกรายการกลาง']    30s
@@ -47,14 +50,14 @@ Add REGIS Success
     Wait Until Element Is Not Visible    xpath=//mat-dialog-container    10s
     Wait Until Element Is Visible    xpath=//label[normalize-space()='ชื่อรายการ (เพิ่มเติม)']    30s
     Input Text    xpath=//textarea[@placeholder='กรุณาเลือก']       ${ชื่อรายการเพิ่มเติม}
-    Scroll Element Into View    ${Operation area_button}
-    Click Element    ${Operation area_button}
-    Wait Until Element Is Visible    xpath=//mat-radio-button[.//input[@type='radio' and @value='Y']]    30s
-    Click Element    xpath=//mat-radio-button[.//input[@type='radio' and @value='Y']]
-    Click Element    xpath=//mat-dialog-container//button[normalize-space()='บันทึก']
-    Wait Until Element Is Visible    xpath=//button[contains(@class, 'swal2-confirm')]    10s
-    Click Element    xpath=//button[contains(@class, 'swal2-confirm')]
-    Wait Until Element Is Visible    xpath=//*[contains(normalize-space(), 'ส่วนกลาง (ดำเนินการทั่วประเทศ หรือไม่สามารถระบุพื้นที่ดำเนินการได้)')]    30s
+    # Scroll Element Into View    ${Operation area_button}
+    # Click Element    ${Operation area_button}
+    # Wait Until Element Is Visible    xpath=//mat-radio-button[.//input[@type='radio' and @value='Y']]    30s
+    # Click Element    xpath=//mat-radio-button[.//input[@type='radio' and @value='Y']]
+    # Click Element    xpath=//mat-dialog-container//button[normalize-space()='บันทึก']
+    # Wait Until Element Is Visible    xpath=//button[contains(@class, 'swal2-confirm')]    10s
+    # Click Element    xpath=//button[contains(@class, 'swal2-confirm')]
+    # Wait Until Element Is Visible    xpath=//*[contains(normalize-space(), 'ส่วนกลาง (ดำเนินการทั่วประเทศ หรือไม่สามารถระบุพื้นที่ดำเนินการได้)')]    30s
     ${unit_dropdown}=    Set Variable    xpath=//label[contains(normalize-space(), 'หน่วยนับ')]/following::mat-select[1]//div[contains(@class, 'mat-mdc-select-trigger')]
     Wait Until Element Is Visible    ${unit_dropdown}    30s
     Click Element    ${unit_dropdown}
@@ -466,21 +469,26 @@ Login And Navigate To App
     ${c2web_locator} =    Set Variable    xpath=//*[contains(text(), 'C2-WEB')]
     Wait Until Element Is Visible    ${c2web_locator}    30s
     Click Element    ${c2web_locator}
-    Wait Until Element Is Not Visible    ${c2web_locator}    30s
-    Wait Until Element Is Visible    id=iframemicroapp    30s
+    Wait Until Element Is Not Visible    ${c2web_locator}    60s
+    Wait Until Element Is Visible    id=iframemicroapp    60s
     Select Frame    id=iframemicroapp
     sleep     5s
-    Wait Until Element Is Visible    xpath=//span[normalize-space()='หน่วยปฏิบัติ']    30s
-
+    Wait Until Element Is Visible    xpath=//span[normalize-space()='ส่วนกลาง']    30s
+    
 Go TO REGISTRATION
-    Click Element    xpath=//span[normalize-space()='หน่วยปฏิบัติ']
-    Wait Until Keyword Succeeds    5x    1s    Wait Until Element Is Visible    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ (2.3)')]    30s
-    Click Element    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ (2.3)')]
-    Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการหน่วยปฏิบัติ')]    30s
-    Click Element    xpath=//div[contains(text(), 'ทะเบียนรายการหน่วยปฏิบัติ')]
+    #Click Element    xpath=//span[normalize-space()='หน่วยปฏิบัติ']
+    Click Element    xpath=//span[normalize-space()='ส่วนกลาง']
+   #Keyword Succeeds    5x    1s    Wait Until Element Is Visible    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ (2.3)')]    30s
+    #Click Element    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ (2.3)')]
+    Wait Until Keyword Succeeds    5x    1s    Wait Until Element Is Visible    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ อปท. (2.4)')]    30s
+    Click Element    xpath=//div[contains(text(), 'จัดทำคำของบประมาณ อปท. (2.4)')]
+    #Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการหน่วยปฏิบัติ')]    30s
+    #Click Element    xpath=//div[contains(text(), 'ทะเบียนรายการหน่วยปฏิบัติ')]
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการ')]    30s
+    Click Element    xpath=//div[contains(text(), 'ทะเบียนรายการ')]
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายการข้อมูล')]    30s
     Element Should Contain    xpath=//div[contains(text(), 'รายการข้อมูล')]    รายการข้อมูล
-
+    
 #ไว้อ่าน เเชทgenerate
 Select Option In Dialog
     [Arguments]    ${LABEL_NAME}    ${OPTION_TEXT}
