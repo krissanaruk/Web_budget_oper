@@ -27,13 +27,117 @@ Requese Budget success
     [Documentation]    สร้างรายการงบประมาณสำเร็จ
     [Tags]     regression    e2e
     Go TO Budget request
+    ${year_select}=    Set Variable    xpath=//select[.//option[@value='2568']]
+    Wait Until Element Is Visible    ${year_select}    30s
+    Select From List By Label    ${year_select}    2568
+    SeleniumLibrary.Click Element    xpath=//button[contains(normalize-space(), 'เพิ่มรายการ')]
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
+    Element Should Contain    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    รายละเอียดรายการ
+    Click Element    xpath=//mat-radio-button[.//input[@type='radio' and @value='1']]
+    Select Option Dialog        แผนงานตามยุทธศาสตร์การจัดสรร     6400 : แผนงานบูรณาการต่อต้านการทุจริตและประพฤติมิชอบ   
+    Select Option Dialog        ผลผลิต/โครงการ      68000019 : โครงการเเพทย์   
+    Select Option Dialog        กิจกรรม             68000055 : กิจกรรมแพทย์  
+    Select Option Dialog        ประเภทงบรายจ่าย      03 : งบลงทุน         
+    Select Option Dialog        หมวดรายจ่ายย่อ       600 : ค่าครุภัณฑ์       
+    Sleep    3s
+    Click Element    xpath=//*[@id="register-list"]/div/div[2]/div[1]
+    Wait Until Element Is Visible    xpath=//button[contains(normalize-space(), 'ค้นหา')]    30s
+    Click Element    xpath=//button[contains(normalize-space(), 'ค้นหา')]    
+    Sleep    5s
+    Wait Until Page Contains Element    xpath=//mat-dialog-container//input[@type='radio']    30s
+    ${radio_input}=    Get WebElement    xpath=//mat-dialog-container//input[@type='radio']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${radio_input}
+    Sleep    5s
+    Wait Until Page Contains Element    xpath=//mat-dialog-container//button[contains(normalize-space(), 'บันทึก')]    30s
+    ${save_btn_in_popup}=    Get WebElement    xpath=//mat-dialog-container//button[contains(normalize-space(), 'บันทึก')]
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_btn_in_popup}
+    Wait Until Element Is Not Visible    xpath=//mat-dialog-container    10s
+    Wait Until Element Is Visible    xpath=//button[contains(normalize-space(), 'เพิ่มข้อมูล')]    30s
+    Click Element    xpath=//button[contains(normalize-space(), 'เพิ่มข้อมูล')]
+    Wait Until Element Is Visible    xpath=//button[contains(normalize-space(), 'เพิ่มประเภทเงิน')]    30s
+    Click Element    xpath=//button[contains(normalize-space(), 'เพิ่มประเภทเงิน')]
+    Wait Until Element Is Visible    xpath=//div[contains(normalize-space(), 'ค่าใช้จ่ายตามสิทธิ (Entitlement)')]/preceding-sibling::div[contains(@class, 'checkbox')]    30s
+    Click Element    xpath=//div[contains(normalize-space(), 'ค่าใช้จ่ายตามสิทธิ (Entitlement)')]/preceding-sibling::div[contains(@class, 'checkbox')]
+    Click Button    ตกลง
+    Sleep    5s
+    Input Text    xpath=//div[contains(@class, 'body-cell')]//input     250
+    Sleep    5s
+    Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'คำชี้แจง')]/following::input[@placeholder='กรุณาระบุ'][1]    30s
+    Input Text    xpath=//label[contains(normalize-space(), 'คำชี้แจง')]/following::input[@placeholder='กรุณาระบุ'][1]           จัดซื้อครุภัณฑ์เครื่องเเสกนลายนิ้วมือ เพื่อใช้ในสำนักงาน
+    Click Button    เพิ่มรายละเอียดตัวคูณ
+    Element Should Be Visible    xpath=//div[contains(normalize-space(), 'เพิ่มรายละเอียดตัวคูณ')]
+    Wait Until Page Contains Element    xpath=//label[contains(normalize-space(), 'เลือกรายการจากราคามาตรฐาน')]/preceding-sibling::mat-radio-button//input[@type='radio']    30s
+    ${standard_radio}=    Get WebElement    xpath=//label[contains(normalize-space(), 'เลือกรายการจากราคามาตรฐาน')]/preceding-sibling::mat-radio-button//input[@type='radio']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${standard_radio}
+    Select Option Dialog        กลุ่มรายการ    เกณฑ์ราคากลางคอมพิวเตอร์ (DE)
+    Wait Until Page Contains    ตกลง    10s
+    Click Button    ตกลง
+    Wait Until Page Contains    บันทึก    10s
+    Select Option Dialog        เอกสารราคามาตรฐาน    3 2566
+    Select Option Dialog        รายการอ้างอิงราคามาตรฐาน    เครื่องคอมพิวเตอร์ สำหรับงานประมวลผล แบบที่ 1 * (จอแสดงภาพขนาดไม่น้อยกว่า 19 นิ้ว)
+    Input Text    xpath=//label[contains(normalize-space(), 'จำนวน')]/following-sibling::input      200
+    Wait Until Element Is Visible    xpath=(//mat-dialog-container)[last()]//button[normalize-space()='บันทึก']    30s
+    ${save_popup_btn}=    Get WebElement    xpath=(//mat-dialog-container)[last()]//button[normalize-space()='บันทึก']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_popup_btn}
+    Wait Until Element Is Visible    xpath=//button[contains(normalize-space(), 'แนบเอกสารคำชี้แจง')]    30s
+    ${attach_doc_btn}=    Get WebElement    xpath=//button[contains(normalize-space(), 'แนบเอกสารคำชี้แจง')]
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${attach_doc_btn}
+    Wait Until Element Is Visible    xpath=//div[contains(normalize-space(), 'ชื่อเอกสาร')]/following::input[1]    30s
+    Input Text    xpath=//div[contains(normalize-space(), 'ชื่อเอกสาร')]/following::input[1]    เอกสารงบประมาณ   
+    Choose File    id=dropzone-file    ${FILE_PATH} 
+    Sleep    10s
+    Click Button    ตกลง
+    Wait Until Page Contains    ต่อไป    10s
+    Click Button    ต่อไป
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'แผนการใช้จ่ายงบประมาณ')]    30s
+    Sleep    2s
+    Wait Until Page Contains Element    xpath=//input[@type='radio' and @value='average']    30s
+    ${avg_radio}=    Get WebElement    xpath=//input[@type='radio' and @value='average']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${avg_radio}
+    Wait Until Page Contains Element    xpath=//input[@type='radio' and @value='quarterly']    30s
+    ${quarterly_radio}=    Get WebElement    xpath=//input[@type='radio' and @value='quarterly']
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${quarterly_radio}
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'ธันวาคม')]/following::input[1]    100000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'มีนาคม')]/following::input[1]    110000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'มิถุนายน')]/following::input[1]    120000
+    # Wait Until Element Is Visible    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    30s
+    # Input Text    xpath=//label[contains(normalize-space(), 'กันยายน')]/following::input[1]    130000
+    Wait Until Element Is Not Visible    xpath=//div[contains(@class, 'ngx-spinner-overlay')]    30s
+
+    # 2. รอให้ปุ่มบันทึก *ใน Popup นี้* ปรากฏ
+    # สังเกต XPath: เราเพิ่ม //app-form-budget-dialog-request นำหน้า เพื่อบอกขอบเขต
+    ${save_btn_locator}=    Set Variable    xpath=//app-form-budget-dialog-request//button[contains(@class, 'primary') and normalize-space()='บันทึก']
+    Wait Until Element Is Visible    ${save_btn_locator}    30s
+    
+    # 3. สั่งคลิกด้วย Javascript (เพื่อความแม่นยำสูงสุด)
+    ${save_btn}=    Get WebElement    ${save_btn_locator}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${save_btn}
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'ทะเบียนรายการ ระดับที่ 1')]    30s
+    Click Button    บันทึก
+    Wait Until Page Contains    ตกลง    30s
+    Click Button    ตกลง
+    # Wait Until Page Contains    ตกลง    30s
+    # Sleep    5s
+    # Click Button    ตกลง
+    Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
+    Sleep    5s
+    
+
+Requese Budget เเบบผูกพัน success
+    [Documentation]    สร้างรายการงบประมาณสำเร็จ
+    [Tags]     regression    e2e
+    Go TO Budget request
     Click Element    xpath=//button[contains(normalize-space(), 'เพิ่มรายการ')]
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
     Element Should Contain    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    รายละเอียดรายการ
-    Click Element    id=mat-radio-2
-    Select Option Dialog        แผนงานตามยุทธศาสตร์การจัดสรร     7000 : แผนงานบริหารจัดการหนี้ภาครัฐ   
-    Select Option Dialog        ผลผลิต/โครงการ      68000005 : ผลลิตทดสอบแผนงาน 1   
-    Select Option Dialog        กิจกรรม             68000044 : กิจกรรมผลลิตทดสอบแผนงาน 1  
+    Click Element    xpath=//mat-radio-button[.//input[@type='radio' and @value='2']]
+    Sleep    5s
+    Select Option Dialog        แผนงานตามยุทธศาสตร์การจัดสรร     6400 : แผนงานบูรณาการต่อต้านการทุจริตและประพฤติมิชอบ   
+    Select Option Dialog        ผลผลิต/โครงการ      68000019 : โครงการเเพทย์   
+    Select Option Dialog        กิจกรรม             68000055 : กิจกรรมแพทย์  
     Select Option Dialog        ประเภทงบรายจ่าย      03 : งบลงทุน         
     Select Option Dialog        หมวดรายจ่ายย่อ       600 : ค่าครุภัณฑ์       
     Sleep    3s
@@ -121,7 +225,7 @@ Requese Budget success
     # Click Button    ตกลง
     Wait Until Element Is Visible    xpath=//div[contains(text(), 'รายละเอียดรายการ')]    30s
     Sleep    5s
-    
+
 *** Keywords ***
 Login And Navigate To App
     Open Browser To Login Page
@@ -151,10 +255,14 @@ Go TO Budget request
 Select Option Dialog
     [Arguments]    ${LABEL_NAME}    ${OPTION_TEXT}    ${INDEX}=1
     [Documentation]    เลือก Dropdown
-    ${dropdown_xpath}=    Set Variable     xpath=//label[contains(., '${LABEL_NAME}')]/following::mat-select[${INDEX}]//div[contains(@class, 'mat-mdc-select-trigger')]
+    ${dropdown_xpath}=     Set Variable     xpath=//label[contains(., '${LABEL_NAME}')]/following::mat-select[${INDEX}]//div[contains(@class, 'mat-mdc-select-trigger')]
+    Scroll Element Into View    ${dropdown_xpath}
     Wait Until Element Is Visible    ${dropdown_xpath}    30s
     Click Element    ${dropdown_xpath}
+    ${option_xpath}=    Set Variable    xpath=//mat-option//span[contains(normalize-space(), '${OPTION_TEXT}')]
     Wait Until Element Is Visible    xpath=//mat-option//span[contains(normalize-space(), '${OPTION_TEXT}')]    10s
-    Click Element    xpath=//mat-option//span[contains(normalize-space(), '${OPTION_TEXT}')]
-    Sleep    1s
+    Scroll Element Into View    ${option_xpath}
+    Sleep    0.5s
+    ${element}=    Get WebElement    ${option_xpath}
+    Execute Javascript    arguments[0].click();    ARGUMENTS    ${element}
 

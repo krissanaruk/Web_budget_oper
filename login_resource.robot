@@ -5,16 +5,16 @@ Library     SeleniumLibrary    run_on_failure=Capture Page Screenshot
 ${BROWSER}           Chrome
 ${LOGIN_URL}         https://neb.centerapp.io/center-web/login
 ${WEBAPP_URL}        https://neb.centerapp.io/center-web/apps
-${Main_URL}          https://neb.centerapp.io/center-web/micro-app?app=a3512d85-2967-4826-b8ec-667c8bf43c74
+${Main_URL}          https://neb.centerapp.io/center-web/custom/home
 ${APP_URL}           https://neb.centerapp.io/center-web/micro-app?app=5716e440-1ecb-475a-a2ea-26c0b9835fec
 ${EMAIL_INPUT}       xpath=//*[@id="root"]/div/main/div/div[2]/div/div[2]/div[1]/input
 ${PASSWORD_INPUT}    xpath=//*[@id="root"]/div/main/div/div[2]/div/div[2]/div[1]/span/input
 ${LOGIN_BUTTON}      xpath=//*[@id="root"]/div/main/div/div[2]/div/div[2]/div[3]/button
 
 # Test data
-${OPER_EMAIL}        oper-unit@neb.go.th
-${DEPT_EMAIL}        dept-unit@neb.go.th
-${MIN_EMAIL}         min-unit@neb.go.th
+${OPER_EMAIL}        it-center@neb.go.th
+${DEPT_EMAIL}        dept-unit1@neb.go.th
+${MIN_EMAIL}         min-unit1@neb.go.th
 ${VALID_PASSWORD}    P@ssw0rd
 ${MSG_LOGIN_SUCCESS}    เข้าสู่ระบบแอดมินสำเร็จ
 ${INVALID_EMAIL}     1234
